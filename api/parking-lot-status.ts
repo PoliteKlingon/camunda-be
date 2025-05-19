@@ -37,7 +37,7 @@ export default function handler(req: VercelRequest, res: VercelResponse) {
 
     //  activity flags (30% chance)
     let unusualActivityFlags = [];
-    if (Math.random() < 0.3) {
+    if (Math.random() < 0.75) {
         // Pick 1-2 random unusual activities
         const numActivities = Math.floor(Math.random() * 2) + 1;
         unusualActivityFlags = [...unusualActivities]
