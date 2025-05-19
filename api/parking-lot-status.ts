@@ -22,17 +22,19 @@ export default function handler(req: VercelRequest, res: VercelResponse) {
     const overallCapacity = 150;
     const currentVehicleCountSystem = Math.floor(Math.random() * 80) + 10;
 
-    const columns = columnIds.map(columnId => {
+    // Create individual column objects instead of an array
+    const colEntries = columnIds.reduce((acc, columnId) => {
         const capacity = 50;
         const occupiedSpaces = Math.floor(Math.random() * (capacity + 1));
 
-        return {
-            column_id: columnId,
+        acc[`Col${columnId}`] = {
             capacity,
             occupied_spaces: occupiedSpaces,
             plate_numbers_detected: occupiedSpaces
         };
-    });
+
+        return acc;
+    }, {} as Record<string, any>);
 
     // Activity flags (75% chance)
     let unusualActivityMessage = "";
@@ -52,7 +54,7 @@ export default function handler(req: VercelRequest, res: VercelResponse) {
         timestamp,
         overall_capacity: overallCapacity,
         current_vehicle_count_system: currentVehicleCountSystem,
-        columns,
+        ...colEntries, // Spread individual column objects
         unusual_activity: unusualActivityMessage
     });
 }
