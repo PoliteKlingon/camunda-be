@@ -27,7 +27,7 @@ export default function handler(req: VercelRequest, res: VercelResponse) {
         const capacity = 50;
         const occupiedSpaces = Math.floor(Math.random() * (capacity + 1));
 
-        acc[`Col${columnId}`] = {
+        acc[`col${columnId}`] = {
             capacity,
             occupied_spaces: occupiedSpaces,
             plate_numbers_detected: occupiedSpaces
